@@ -6,16 +6,16 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * CepDistancium Entity
+ * cepDistancia Entity
  *
  * @property int $id
- * @property int|null $cep_origem
- * @property int|null $cep_destino
+ * @property string|null $cep_origem
+ * @property string|null $cep_destino
  * @property float|null $distancia_calculada
  * @property \Cake\I18n\DateTime $data_criacao
  * @property \Cake\I18n\DateTime|null $data_atualizacao
  */
-class CepDistancium extends Entity
+class cepDistancia extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

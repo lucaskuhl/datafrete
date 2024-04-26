@@ -1,52 +1,53 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\CepDistancium> $cepDistancia
+ * @var \App\Model\Entity\cepDistancia[]|\Cake\Collection\CollectionInterface $cepDistancia
  */
 ?>
-<div class="cepDistancia index content">
-    <?= $this->Html->link(__('New Cep Distancium'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Cep Distancia') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('cep_origem') ?></th>
-                    <th><?= $this->Paginator->sort('cep_destino') ?></th>
-                    <th><?= $this->Paginator->sort('distancia_calculada') ?></th>
-                    <th><?= $this->Paginator->sort('data_criacao') ?></th>
-                    <th><?= $this->Paginator->sort('data_atualizacao') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($cepDistancia as $cepDist): ?>
-                <tr>
-                    <td><?= $this->Number->format($cepDist->id) ?></td>
-                    <td><?= $cepDist->cep_origem === null ? '' : $cepDist->cep_origem ?></td>
-                    <td><?= $cepDist->cep_destino === null ? '' : $cepDist->cep_destino ?></td>
-                    <td><?= $cepDist->distancia_calculada === null ? '' : $cepDist->distancia_calculada ?></td>
-                    <td><?= h($cepDist->data_criacao) ?></td>
-                    <td><?= $cepDist->data_atualizacao === null ? '--' : h($cepDist->data_atualizacao) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $cepDist->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $cepDist->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $cepDist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cepDist->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+<?php $this->extend('/layout/TwitterBootstrap/dashboard'); ?>
+
+<?php $this->start('tb_actions'); ?>
+<li><?= $this->Html->link(__('Cadastrar Cep'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+<?php $this->end(); ?>
+<?php $this->assign('tb_sidebar', '<ul class="nav flex-column">' . $this->fetch('tb_actions') . '</ul>'); ?>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('cep_origem') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('cep_destino') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('Distância Calculada') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('Data de Criação') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('Data de Atualização') ?></th>
+        <th scope="col" class="actions"><?= __('Ações') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($cepDistancia as $cepDist) : ?>
+        <tr>
+            <td><?= $this->Number->format($cepDist->id) ?></td>
+            <td><?= h($cepDist->cep_origem) ?></td>
+            <td><?= h($cepDist->cep_destino) ?></td>
+            <td><?= $cepDist->distancia_calculada === null ? '' : $this->Number->format($cepDist->distancia_calculada) ?></td>
+            <td><?= h($cepDist->data_criacao) ?></td>
+            <td><?= h($cepDist->data_atualizacao) ?></td>
+            <td class="actions">
+                <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $cepDist->id], ['title' => __('View'), 'class' => 'btn btn-secondary']) ?>
+                <?= $this->Html->link(__('Editar'), ['action' => 'edit', $cepDist->id], ['title' => __('Edit'), 'class' => 'btn btn-secondary']) ?>
+                <?= $this->Form->postLink(__('Remover'), ['action' => 'delete', $cepDist->id], ['confirm' => __('Tem certeza que deseja remover o cep # {0}?', $cepDist->id), 'title' => __('Delete'), 'class' => 'btn btn-danger']) ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<div class="paginator">
+    <ul class="pagination">
+        <?= $this->Paginator->first('«', ['label' => __('Primeiro')]) ?>
+        <?= $this->Paginator->prev('‹', ['label' => __('Anterior')]) ?>
+        <?= $this->Paginator->numbers() ?>
+        <?= $this->Paginator->next('›', ['label' => __('Próximo')]) ?>
+        <?= $this->Paginator->last('»', ['label' => __('Último')]) ?>
+    </ul>
+    <p><?= $this->Paginator->counter(__('Página {{page}} de {{pages}}, mostrando {{current}} registro(s) de {{count}} total(is)')) ?></p>
 </div>

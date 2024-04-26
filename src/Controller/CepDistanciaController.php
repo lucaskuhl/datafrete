@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Controller\Helpers\CepHandler;
 
-
 /**
  * CepDistancia Controller
  *
@@ -119,9 +118,9 @@ class CepDistanciaController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $cepDistancia = $this->CepDistancia->get($id);
         if ($this->CepDistancia->delete($cepDistancia)) {
-            $this->Flash->success(__('CEP excluído com sucesso!'));
+            $this->Flash->success(__('The cep distancium has been deleted.'));
         } else {
-            $this->Flash->error(__('Erro ao deletar, por favor tente novamente.'));
+            $this->Flash->error(__('The cep distancium could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

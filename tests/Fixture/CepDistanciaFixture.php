@@ -26,11 +26,11 @@ class CepDistanciaFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'cep_origem' => 1,
-                'cep_destino' => 1,
+                'cep_origem' => 'Lorem ',
+                'cep_destino' => 'Lorem ',
                 'distancia_calculada' => 1,
-                'data_criacao' => 1714093666,
-                'data_atualizacao' => 1714093666,
+                'data_criacao' => 1714153658,
+                'data_atualizacao' => 1714153658,
             ],
         ];
         parent::init();

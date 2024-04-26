@@ -11,19 +11,19 @@ use Cake\Validation\Validator;
 /**
  * CepDistancia Model
  *
- * @method \App\Model\Entity\CepDistancium newEmptyEntity()
- * @method \App\Model\Entity\CepDistancium newEntity(array $data, array $options = [])
- * @method array<\App\Model\Entity\CepDistancium> newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\CepDistancium get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
- * @method \App\Model\Entity\CepDistancium findOrCreate($search, ?callable $callback = null, array $options = [])
- * @method \App\Model\Entity\CepDistancium patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method array<\App\Model\Entity\CepDistancium> patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\CepDistancium|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method \App\Model\Entity\CepDistancium saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
- * @method iterable<\App\Model\Entity\CepDistancium>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\CepDistancium>|false saveMany(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\CepDistancium>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\CepDistancium> saveManyOrFail(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\CepDistancium>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\CepDistancium>|false deleteMany(iterable $entities, array $options = [])
- * @method iterable<\App\Model\Entity\CepDistancium>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\CepDistancium> deleteManyOrFail(iterable $entities, array $options = [])
+ * @method \App\Model\Entity\cepDistancia newEmptyEntity()
+ * @method \App\Model\Entity\cepDistancia newEntity(array $data, array $options = [])
+ * @method array<\App\Model\Entity\cepDistancia> newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\cepDistancia get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \App\Model\Entity\cepDistancia findOrCreate($search, ?callable $callback = null, array $options = [])
+ * @method \App\Model\Entity\cepDistancia patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method array<\App\Model\Entity\cepDistancia> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\cepDistancia|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \App\Model\Entity\cepDistancia saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method iterable<\App\Model\Entity\cepDistancia>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\cepDistancia>|false saveMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\cepDistancia>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\cepDistancia> saveManyOrFail(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\cepDistancia>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\cepDistancia>|false deleteMany(iterable $entities, array $options = [])
+ * @method iterable<\App\Model\Entity\cepDistancia>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\cepDistancia> deleteManyOrFail(iterable $entities, array $options = [])
  */
 class CepDistanciaTable extends Table
 {
@@ -51,11 +51,13 @@ class CepDistanciaTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('cep_origem')
+            ->scalar('cep_origem')
+            ->maxLength('cep_origem', 8)
             ->allowEmptyString('cep_origem');
 
         $validator
-            ->integer('cep_destino')
+            ->scalar('cep_destino')
+            ->maxLength('cep_destino', 8)
             ->allowEmptyString('cep_destino');
 
         $validator
