@@ -66,7 +66,11 @@ vendor/bin/phinx init
         ],
        ...
    ```
-6. Inicializar o servidor do cakephp e acessar em http://localhost:8080/cep-distancia
+6. Realizar as migrations
+   ```
+   vendor/bin/phinx migrate
+   ```
+7. Inicializar o servidor do cakephp e acessar em http://localhost:8080/cep-distancia
    ```
    bin/cake server -p 8080
    ```
