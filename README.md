@@ -1,53 +1,90 @@
-# CakePHP Application Skeleton
+# Calculadora de Distância
+> Cadastro de CEPs e Cálculo de distâncias
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%207-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+O seguinte projeto é um buscador de CEP que recebe dois CEPs e faz o cálculo da distância entre eles.
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+O projeto conta com o CRUD básico: criar, ler, atualizar e excluir. Recebendo um CEP de Origem e um CEP de Destino onde é feito o cálculo da distância entre eles. Usa como método de validação a API [CEP Aberto](https://cepaberto.com/) 
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## Instalação
 
-## Installation
-
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
-
-If Composer is installed globally, run
-
-```bash
-composer create-project --prefer-dist cakephp/app
+1. Clonar o projeto;
+2. Após clonar o projeto instalar as dependências com o composer;
 ```
-
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+composer install
 ```
-
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
-```bash
-bin/cake server -p 8765
+3. Iniciar o Phinx para rodar as migrations
 ```
+vendor/bin/phinx init
+```
+4. Atualizar o arquivo phinx.php para utilizar o SQLite
+```
+'environments' => [
+            'default_migration_table' => 'phinxlog',
+            'default_environment' => 'development',
+            'production' => [
+                'adapter' => 'sqlite',
+                'host' => 'localhost',
+                'name' => 'datafrete',
+                'mode' => 'rwc',
+                'user' => 'root',
+                'pass' => '',
+                'port' => '3306',
+                'charset' => 'utf8',
+            ],
+            'development' => [
+                'adapter' => 'sqlite',
+                'host' => 'localhost',
+                'name' => 'datafrete',
+                'mode' => 'rwc',
+                'user' => 'root',
+                'pass' => '',
+                'port' => '3306',
+                'charset' => 'utf8',
+            ],
+            'testing' => [
+                'adapter' => 'sqlite',
+                'host' => 'localhost',
+                'name' => 'datafrete',
+                'mode' => 'rwc',
+                'user' => 'root',
+                'pass' => '',
+                'port' => '3306',
+                'charset' => 'utf8',
+            ]
+        ],
+        ...
+```
+5. Atualizar o arquivo app_local.php para usar o SQLite
+   ```
+   'Datasources' => [
+        'default' => [
+            'host' => 'localhost',
+            'username' => 'datafrete',
+            'password' => 'secret',
+            'database' => 'datafrete', 
+            'url' => env('DATABASE_URL', null),
+        ],
+       ...
+   ```
+6. Inicializar o servidor do cakephp e acessar em http://localhost:8080/cep-distancia
+   ```
+   bin/cake server -p 8080
+   ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+## Requisitos
 
-## Update
+Para o projeto funcionar é preciso atender aos seguintes requisitos: 
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+1. PHP >= 8.1
+2. Extensões ativas: mbstring, openssl, intl;
+3. Composer instalado globalmente;
 
-## Configuration
+A key para a API de CEPs já se encontra no projeto, mas pode ser alterada em CepHandler.php
+Para acessar a dashboard das APIs o login e senha estão dentro do seguinte arquivo: `info_keys.txt`
 
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
 
-## Layout
+## Bibliotecas e Frameworks utilizados: 
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+1. [CakePHP](https://book.cakephp.org/5/en/index.html);
+2. [Phinx](https://book.cakephp.org/phinx/0/en/intro.html);
+3. [BootstrapUI](https://github.com/FriendsOfCake/bootstrap-ui);
